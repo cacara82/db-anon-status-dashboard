@@ -9,7 +9,6 @@ var now = new Date();
 // FUNCTIONS
 export function Clock() {
     const [hora, setHora] = useState(new Date());
-
     // useEffect
     useEffect(() => {
         const interval = setInterval(() => {
@@ -17,7 +16,6 @@ export function Clock() {
         }, 1000)
         return () => clearInterval(interval);
     }, [])
-
     return (
         <div>
             <p className="text-center border-2 rounded-2xl p-4 m-2">{now.toLocaleDateString()} - {hora.toLocaleTimeString()}</p>
@@ -68,22 +66,28 @@ export function MappingTable() {
 
     // Return the table
     return (
-        <table>
-            <thead>
-                <tr>
+        <table className="border-2 text-center table-fixed text-sm">
+            <thead className="border-2">
+                <tr className="border-2">
                     {headers.map((header) => (
-                        <th>
+                        <th className="border-2">
                             {header}
                         </th>
                     ))}
                 </tr>
             </thead>
-            <tbody>
+            <tbody className="border-2">
                 {csvData.map((row, i) => (
-                    <tr key={i}>
+                    <tr key={i} className="border-2">
                         {headers.map((header) => (
-                          <td>
-                            {row[header]}
+                          <td className="border-2">
+                            {header === "main_dm_email" ? (
+                                <a href={`mailto:${row[header]}`} className="text-blue-600 hover:underline">
+                                    {row[header]}
+                                </a>
+                            ) : (
+                                row[header]
+                            )}
                           </td>  
                         ))}
                     </tr>
