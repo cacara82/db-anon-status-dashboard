@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import Papa from "papaparse";
+import csvFilename from "/src/assets/data.csv?raw";
 
 // Attributes
 var now = new Date();
-var csvFilename = "src/assets/data.csv";
+//var csvFilename = "src/assets/data.csv";
 
 // FUNCTIONS
 export function Clock() {
@@ -34,7 +35,7 @@ export function MappingTable() {
     // useEffect to parse the csv file
     useEffect(() => {
         Papa.parse(csvFilename, {
-            download: true,
+            download: false,
             header: true,
             skipEmptyLines: true,
             complete: (results: any) => {
@@ -42,7 +43,7 @@ export function MappingTable() {
                 setCsvData(results.data);
                 setLoading(false); 
             },
-            error: (err) => {
+            error: (err: any) => {
                 console.error("Error intern de Papa Parse: ", err);
                 setError("Error al carregar l'arxiu CSV.");
                 setLoading(false);
