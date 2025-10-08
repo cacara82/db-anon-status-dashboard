@@ -112,6 +112,22 @@ export function MappingTable() {
                                     <a href={`mailto:${row[header]}`} className="text-blue-600 hover:underline">
                                         {row[header]}
                                     </a>
+                                ) : header === "project_title" ? (
+                                    <p className="font-bold text-lg">
+                                        {row[header]}
+                                    </p>
+                                ) : row[header] === "" ? (
+                                    <p className="italic font-bold text-red-600">
+                                        N/A
+                                    </p>
+                                ) : row[header] === "1" ? (
+                                    <p>
+                                        Si
+                                    </p>
+                                ) : row[header] === "0" ? (
+                                    <p>
+                                        No
+                                    </p>
                                 ) : (
                                     row[header]
                                 )}
